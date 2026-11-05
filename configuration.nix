@@ -208,6 +208,7 @@
     nautilus
     gtk3
     blender
+    virtualbox
 
     # Gaming & Development
     prismlauncher
