@@ -195,6 +195,7 @@
     cava
     pipes
     yt-dlp
+    ripgrep
 
     # Media, Graphics & Desktop Apps
     (mpv.override { scripts = [ mpvScripts.mpris ]; })
@@ -206,6 +207,7 @@
     gearlever
     nautilus
     gtk3
+    blender
 
     # Gaming & Development
     prismlauncher
