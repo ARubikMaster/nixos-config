@@ -223,7 +223,14 @@
     gtk3
     blender
     virtualbox
-    plover
+    ((import (
+      fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz"
+    ) {
+      src = fetchTarball "https://github.com/openstenoproject/plover-flake/archive/master.tar.gz";
+    }).defaultNix.packages.${pkgs.system}.plover.withPlugins (ps: with ps; [
+      plover-lapwing-aio
+      plover-dict-commands
+    ]))
 
     # Gaming & Development
     prismlauncher
