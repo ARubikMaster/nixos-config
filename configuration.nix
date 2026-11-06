@@ -4,13 +4,24 @@
   imports = [
     ./hardware-configuration.nix
     (import (builtins.fetchTarball "https://github.com/ezKEa/aagl-gtk-on-nix/archive/main.tar.gz")).module
+    (import (
+      builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz"
+    ) {
+      src = builtins.fetchTarball "https://github.com/pedorich-n/playit-nixos-module/archive/main.tar.gz";
+    }).defaultNix.nixosModules.default
   ];
 
   # --- Nix & Binary Cache Settings ---
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
-    substituters = [ "https://ezkea.cachix.org" ];
-    trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
+    substituters = [ 
+      "https://ezkea.cachix.org" 
+      "https://playit-nixos-module.cachix.org"
+    ];
+    trusted-public-keys = [ 
+      "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" 
+      "playit-nixos-module.cachix.org-1:22hBXWXBbd/7o1cOnh+p0hpFUVk9lPdRLX3p5YSfRz4="
+    ];
   };
   nixpkgs.config.allowUnfree = true;
 
@@ -258,6 +269,11 @@
           '
       fi
     '';
+  };
+
+  services.playit = {
+    enable = true;
+    secretPath = "/etc/playit/secret.toml";
   };
 
   system.stateVersion = "26.05";
