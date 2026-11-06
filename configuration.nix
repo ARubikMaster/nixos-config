@@ -75,6 +75,14 @@
     config.common.default = [ "hyprland" "gtk" ];
   };
 
+  services.udev.extraRules = ''
+    # Allow Plover to output keystrokes via uinput (essential for Wayland)
+    KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"
+    
+    # Allow access to HID-based steno keyboards (Plover HID protocol)
+    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0660", GROUP="dialout"
+  '';
+
   xdg.mime = {
     enable = true;
     defaultApplications = {
@@ -162,7 +170,13 @@
   users.users."gregory" = {
     isNormalUser = true;
     description = "gregory";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ 
+      "networkmanager" 
+      "wheel"
+      "dialout"
+      "input"
+      "uinput"
+    ];
     shell = pkgs.fish;
     packages = with pkgs; [
       kdePackages.kate
