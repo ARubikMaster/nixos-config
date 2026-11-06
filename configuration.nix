@@ -239,6 +239,7 @@
     python314
     jdk25
     gcc
+    lumafly
   ];
 
   # --- Activation Scripts ---
