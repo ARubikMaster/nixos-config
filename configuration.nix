@@ -209,6 +209,7 @@
     gtk3
     blender
     virtualbox
+    plover
 
     # Gaming & Development
     prismlauncher
