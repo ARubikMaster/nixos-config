@@ -223,6 +223,7 @@
     gtk3
     blender
     virtualbox
+    nucleus
     ((import (
       fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz"
     ) {
