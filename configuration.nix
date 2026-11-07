@@ -112,6 +112,41 @@
     EDITOR = "nvim";
     VISUAL = "nvim";
     TERMINAL = "kitty";
+
+    LIBRARY_PATH = pkgs.lib.makeLibraryPath (with pkgs; [
+      stdenv.cc.cc
+      glibc
+      libGL
+      libglvnd
+      raylib
+      alsa-lib
+      wayland
+      libxkbcommon
+      xorg.libX11
+      xorg.libXrandr
+      xorg.libXinerama
+      xorg.libXcursor
+      xorg.libXi
+      xorg.libXext
+    ]);
+
+    # Global C/C++ header paths (for #include <GL/gl.h>, <X11/Xlib.h>, etc.)
+    C_INCLUDE_PATH = pkgs.lib.makeSearchPathOutput "dev" "include" (with pkgs; [
+      glibc
+      libGL
+      libglvnd
+      raylib
+      alsa-lib
+      wayland
+      libxkbcommon
+      xorg.libX11
+      xorg.libXrandr
+      xorg.libXinerama
+      xorg.libXcursor
+      xorg.libXi
+      xorg.libXext
+      xorg.xorgproto
+    ]);
   };
 
   # --- File Manager (Thunar) & Storage Services ---
@@ -160,7 +195,17 @@
       gtk4-layer-shell
       wayland
       libGL
+      libglvnd
       glib
+      raylib
+      alsa-lib
+      libxkbcommon
+      xorg.libX11
+      xorg.libXrandr
+      xorg.libXinerama
+      xorg.libXcursor
+      xorg.libXi
+      xorg.libXext
     ];
   };
 
@@ -253,6 +298,7 @@
     jdk25
     gcc
     gnumake
+    pkg-config
     lumafly
   ];
 
