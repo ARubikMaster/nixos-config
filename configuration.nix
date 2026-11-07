@@ -252,6 +252,7 @@
     python314
     jdk25
     gcc
+    gnumake
     lumafly
   ];
 
