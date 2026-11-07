@@ -97,12 +97,13 @@
   xdg.mime = {
     enable = true;
     defaultApplications = {
-      "text/html" = [ "app.zen_browser.zen.desktop" "zen.desktop" ];
-      "x-scheme-handler/http" = [ "app.zen_browser.zen.desktop" "zen.desktop" ];
-      "x-scheme-handler/https" = [ "app.zen_browser.zen.desktop" "zen.desktop" ];
-      "x-scheme-handler/about" = [ "app.zen_browser.zen.desktop" "zen.desktop" ];
-      "x-scheme-handler/unknown" = [ "app.zen_browser.zen.desktop" "zen.desktop" ];
-      "inode/directory" = [ "thunar.desktop" ];
+      "text/html" = [ "app.zen_browser.zen.desktop" "io.github.zen_browser.zen.desktop" "zen.desktop" ];
+      "x-scheme-handler/http" = [ "app.zen_browser.zen.desktop" "io.github.zen_browser.zen.desktop" "zen.desktop" ];
+      "x-scheme-handler/https" = [ "app.zen_browser.zen.desktop" "io.github.zen_browser.zen.desktop" "zen.desktop" ];
+      "x-scheme-handler/about" = [ "app.zen_browser.zen.desktop" "io.github.zen_browser.zen.desktop" "zen.desktop" ];
+      "x-scheme-handler/unknown" = [ "app.zen_browser.zen.desktop" "io.github.zen_browser.zen.desktop" "zen.desktop" ];
+      "application/xhtml+xml" = [ "app.zen_browser.zen.desktop" "io.github.zen_browser.zen.desktop" "zen.desktop" ];
+      "inode/directory" = [ "thunar.desktop" "Thunar.desktop" ];
       "x-scheme-handler/terminal" = [ "kitty.desktop" ];
     };
   };
