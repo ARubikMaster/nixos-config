@@ -113,7 +113,8 @@
     VISUAL = "nvim";
     TERMINAL = "kitty";
 
-    LIBRARY_PATH = pkgs.lib.makeLibraryPath (with pkgs; [
+    # Global linker flags read directly by NixOS's gcc/ld wrapper
+    NIX_LDFLAGS = pkgs.lib.concatMapStringsSep " " (pkg: "-L${pkgs.lib.getLib pkg}/lib") (with pkgs; [
       stdenv.cc.cc
       glibc
       libGL
@@ -130,8 +131,8 @@
       xorg.libXext
     ]);
 
-    # Global C/C++ header paths (for #include <GL/gl.h>, <X11/Xlib.h>, etc.)
-    C_INCLUDE_PATH = pkgs.lib.makeSearchPathOutput "dev" "include" (with pkgs; [
+    # Global include flags read directly by NixOS's gcc wrapper
+    NIX_CFLAGS_COMPILE = pkgs.lib.concatMapStringsSep " " (pkg: "-isystem ${pkgs.lib.getDev pkg}/include") (with pkgs; [
       glibc
       libGL
       libglvnd
@@ -312,8 +313,8 @@
           DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus \
           ${pkgs.bash}/bin/bash -c '
             source /etc/set-environment
-            ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd PATH XDG_DATA_DIRS TERMINAL EDITOR VISUAL
-            ${pkgs.systemd}/bin/systemctl --user import-environment PATH XDG_DATA_DIRS TERMINAL EDITOR VISUAL
+            ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd PATH XDG_DATA_DIRS TERMINAL EDITOR VISUAL NIX_LDFLAGS NIX_CFLAGS_COMPILE
+            ${pkgs.systemd}/bin/systemctl --user import-environment PATH XDG_DATA_DIRS TERMINAL EDITOR VISUAL NIX_LDFLAGS NIX_CFLAGS_COMPILE
             rm -rf /home/gregory/.cache/wofi* /home/gregory/.cache/walker /home/gregory/.cache/elephant
           '
       fi
