@@ -297,10 +297,39 @@
     wine
     python314
     jdk25
-    gcc
     gnumake
     pkg-config
     lumafly
+    (pkgs.symlinkJoin {
+      name = "gcc-with-global-libs";
+      paths = [ pkgs.gcc ];
+      buildInputs = [ pkgs.makeWrapper ];
+      postBuild = let
+        libs = with pkgs; [
+          glibc
+          libGL
+          libglvnd
+          raylib
+          alsa-lib
+          wayland
+          libxkbcommon
+          xorg.libX11
+          xorg.libXrandr
+          xorg.libXinerama
+          xorg.libXcursor
+          xorg.libXi
+          xorg.libXext
+        ];
+        headers = libs ++ [ pkgs.xorg.xorgproto ];
+        ldflags = pkgs.lib.concatMapStringsSep " " (pkg: "-L${pkgs.lib.getLib pkg}/lib") libs;
+        cflags = pkgs.lib.concatMapStringsSep " " (pkg: "-isystem ${pkgs.lib.getDev pkg}/include") headers;
+      in ''
+        for bin in gcc g++ cc c++; do
+          wrapProgram $out/bin/$bin \
+            --add-flags "${cflags} ${ldflags}"
+        done
+      '';
+    })
   ];
 
   # --- Activation Scripts ---
