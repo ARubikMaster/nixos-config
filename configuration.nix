@@ -269,6 +269,7 @@ in
     starship
     fastfetch
     unstable.fetch
+    peaclock
     htop
     cava
     pipes
