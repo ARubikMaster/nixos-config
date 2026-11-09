@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
 
+let
+  unstable = import (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") {
+    config.allowUnfree = config.nixpkgs.config.allowUnfree;
+  };
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -263,6 +268,7 @@
     wget
     starship
     fastfetch
+    unstable.fetch
     htop
     cava
     pipes
