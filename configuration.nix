@@ -275,6 +275,10 @@ in
     pipes
     yt-dlp
     ripgrep
+    file-roller
+    zip
+    unzip
+    p7zip
 
     # Media, Graphics & Desktop Apps
     (mpv.override { scripts = [ mpvScripts.mpris ]; })
