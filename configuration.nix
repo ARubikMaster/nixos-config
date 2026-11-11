@@ -286,6 +286,7 @@ in
     ffmpeg
     kdePackages.kdenlive
     vesktop
+    discord-ptb
     bitwarden-desktop
     gearlever
     nautilus
