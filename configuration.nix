@@ -295,6 +295,7 @@ in
     virtualbox
     nucleus
     thunderbird
+    valent
     thunar-archive-plugin
     ((import (
       fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz"
