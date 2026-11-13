@@ -62,7 +62,7 @@ in
     };
   };
   services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # services.desktopManager.plasma6.enable = true;
 
   programs.hyprland = {
     enable = true;
@@ -179,19 +179,6 @@ in
   };
   services.blueman.enable = true; # Provides blueman-manager GUI
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-  };
-
-  programs.anime-game-launcher.enable = true;
-
-  programs.appimage = {
-    enable = true;
-    binfmt = true;
-  };
-
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
@@ -228,6 +215,22 @@ in
   programs.fish.enable = true;
   programs.firefox.enable = true;
   programs.obs-studio.enable = true;
+  programs.anime-game-launcher.enable = true;
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.valent;
+  };
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
+
 
   # --- User Account ---
   users.users."gregory" = {
@@ -295,7 +298,6 @@ in
     virtualbox
     nucleus
     thunderbird
-    valent
     thunar-archive-plugin
     ((import (
       fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz"
@@ -314,6 +316,7 @@ in
     gnumake
     pkg-config
     lumafly
+    osu-lazer-bin
     (pkgs.symlinkJoin {
       name = "gcc-with-global-libs";
       paths = [ pkgs.gcc ];
