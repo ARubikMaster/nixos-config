@@ -297,6 +297,7 @@ in
     blender
     virtualbox
     nucleus
+    proton-vpn
     thunderbird
     thunar-archive-plugin
     ((import (
