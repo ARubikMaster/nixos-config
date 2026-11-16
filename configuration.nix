@@ -300,7 +300,7 @@ in
     proton-vpn
     thunderbird
     thunar-archive-plugin
-    discordchatexporter-desktop
+    discordchatexporter-cli
     ((import (
       fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz"
     ) {
