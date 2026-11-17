@@ -282,6 +282,7 @@ in
     zip
     unzip
     p7zip
+    tree
 
     # Media, Graphics & Desktop Apps
     (mpv.override { scripts = [ mpvScripts.mpris ]; })
