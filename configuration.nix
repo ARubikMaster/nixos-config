@@ -307,10 +307,23 @@ in
       fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz"
     ) {
       src = fetchTarball "https://github.com/openstenoproject/plover-flake/archive/master.tar.gz";
-    }).defaultNix.packages.${pkgs.system}.plover.withPlugins (ps: with ps; [
+    }).defaultNix.packages.${pkgs.stdenv.hostPlatform.system}.plover.withPlugins (ps: with ps; [
       plover-lapwing-aio
       plover-dict-commands
     ]))
+
+    # Language Servers
+    zls
+    lua-language-server
+    vscode-langservers-extracted # Provides html and cssls
+    typescript-language-server   # Provides ts_ls
+    emmet-language-server
+    clang-tools                  # Provides clangd
+    rust-analyzer                # Required by rustaceanvim
+
+    # Required by nvim-treesitter, telescope, and live-server
+    live-server
+    xdg-utils
 
     # Gaming & Development
     prismlauncher
