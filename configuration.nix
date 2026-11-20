@@ -335,6 +335,7 @@ in
     lumafly
     osu-lazer-bin
     celestia
+    pioneer
     (pkgs.symlinkJoin {
       name = "gcc-with-global-libs";
       paths = [ pkgs.gcc ];
