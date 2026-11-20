@@ -117,42 +117,6 @@ in
     EDITOR = "nvim";
     VISUAL = "nvim";
     TERMINAL = "kitty";
-
-    # Global linker flags read directly by NixOS's gcc/ld wrapper
-    NIX_LDFLAGS = pkgs.lib.concatMapStringsSep " " (pkg: "-L${pkgs.lib.getLib pkg}/lib") (with pkgs; [
-      stdenv.cc.cc
-      glibc
-      libGL
-      libglvnd
-      raylib
-      alsa-lib
-      wayland
-      libxkbcommon
-      xorg.libX11
-      xorg.libXrandr
-      xorg.libXinerama
-      xorg.libXcursor
-      xorg.libXi
-      xorg.libXext
-    ]);
-
-    # Global include flags read directly by NixOS's gcc wrapper
-    NIX_CFLAGS_COMPILE = pkgs.lib.concatMapStringsSep " " (pkg: "-isystem ${pkgs.lib.getDev pkg}/include") (with pkgs; [
-      glibc
-      libGL
-      libglvnd
-      raylib
-      alsa-lib
-      wayland
-      libxkbcommon
-      xorg.libX11
-      xorg.libXrandr
-      xorg.libXinerama
-      xorg.libXcursor
-      xorg.libXi
-      xorg.libXext
-      xorg.xorgproto
-    ]);
   };
 
   # --- File Manager (Thunar) & Storage Services ---
@@ -338,36 +302,6 @@ in
     celestia
     pioneer
     flightgear
-    (pkgs.symlinkJoin {
-      name = "gcc-with-global-libs";
-      paths = [ pkgs.gcc ];
-      buildInputs = [ pkgs.makeWrapper ];
-      postBuild = let
-        libs = with pkgs; [
-          glibc
-          libGL
-          libglvnd
-          raylib
-          alsa-lib
-          wayland
-          libxkbcommon
-          xorg.libX11
-          xorg.libXrandr
-          xorg.libXinerama
-          xorg.libXcursor
-          xorg.libXi
-          xorg.libXext
-        ];
-        headers = libs ++ [ pkgs.xorg.xorgproto ];
-        ldflags = pkgs.lib.concatMapStringsSep " " (pkg: "-L${pkgs.lib.getLib pkg}/lib") libs;
-        cflags = pkgs.lib.concatMapStringsSep " " (pkg: "-isystem ${pkgs.lib.getDev pkg}/include") headers;
-      in ''
-        for bin in gcc g++ cc c++; do
-          wrapProgram $out/bin/$bin \
-            --add-flags "${cflags} ${ldflags}"
-        done
-      '';
-    })
   ];
 
   # --- Activation Scripts ---
@@ -380,8 +314,8 @@ in
           DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus \
           ${pkgs.bash}/bin/bash -c '
             source /etc/set-environment
-            ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd PATH XDG_DATA_DIRS TERMINAL EDITOR VISUAL NIX_LDFLAGS NIX_CFLAGS_COMPILE
-            ${pkgs.systemd}/bin/systemctl --user import-environment PATH XDG_DATA_DIRS TERMINAL EDITOR VISUAL NIX_LDFLAGS NIX_CFLAGS_COMPILE
+            ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd PATH XDG_DATA_DIRS TERMINAL EDITOR VISUAL
+            ${pkgs.systemd}/bin/systemctl --user import-environment PATH XDG_DATA_DIRS TERMINAL EDITOR VISUAL
             rm -rf /home/gregory/.cache/wofi* /home/gregory/.cache/walker /home/gregory/.cache/elephant
           '
       fi
