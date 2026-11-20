@@ -336,6 +336,7 @@ in
     osu-lazer-bin
     celestia
     pioneer
+    flightgear
     (pkgs.symlinkJoin {
       name = "gcc-with-global-libs";
       paths = [ pkgs.gcc ];
