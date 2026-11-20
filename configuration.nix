@@ -267,7 +267,7 @@ in
     thunar-archive-plugin
     gimp
     discordchatexporter-cli
-    gnome-tweaks
+    imv
     ((import (
       fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz"
     ) {
