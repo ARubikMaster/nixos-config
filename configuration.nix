@@ -334,6 +334,7 @@ in
     pkg-config
     lumafly
     osu-lazer-bin
+    celestia
     (pkgs.symlinkJoin {
       name = "gcc-with-global-libs";
       paths = [ pkgs.gcc ];
