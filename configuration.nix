@@ -8,7 +8,6 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    (import (builtins.fetchTarball "https://github.com/ezKEa/aagl-gtk-on-nix/archive/main.tar.gz")).module
     (import (
       builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz"
     ) {
@@ -179,7 +178,6 @@ in
   programs.fish.enable = true;
   programs.firefox.enable = true;
   programs.obs-studio.enable = true;
-  programs.anime-game-launcher.enable = true;
 
   programs.appimage = {
     enable = true;
@@ -269,6 +267,7 @@ in
     discordchatexporter-cli
     libreoffice
     imv
+    baobab
     ((import (
       fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz"
     ) {
