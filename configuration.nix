@@ -245,6 +245,7 @@ in
     unzip
     p7zip
     tree
+    android-tools
 
     # Media, Graphics & Desktop Apps
     (mpv.override { scripts = [ mpvScripts.mpris ]; })
